@@ -1,4 +1,4 @@
-{!! Form::open(['url' => $url, 'method' => $method]) !!}
+{!! Form::open(['url' => $url, 'enctype'=>'multipart/form-data', 'method' => $method]) !!}
     <div class="form-group">
         {{ Form::text('nombre',$product->nombre,['class' => 'form-control', 'placeholder'=>'Nombre del Producto...']) }}
     </div>

@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
             DB::table('products')->insert([
                 'nombre' => 'producto '.$i,
                 'descripcion' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-                'foto' => 'producto'.$i,
+                'foto' => 'producto'.$i.'.jpg',
                 'precio' => 10+$i
             ]);
         }

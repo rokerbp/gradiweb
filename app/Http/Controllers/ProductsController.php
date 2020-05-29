@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Image;
 
 class ProductsController extends Controller
 {
+    protected function random_string() {
+        $key = '';
+        $keys = array_merge( range('a','z'), range(0,9) );
+        for($i=0; $i<10; $i++) {
+           $key .= $keys[array_rand($keys)];
+        }
+        return $key;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,10 +47,15 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $ruta = public_path().'/img/';
+        $imagenOriginal = $request->file('foto');
+        $imagen = Image::make($imagenOriginal);
+        $temp_name = $this->random_string() . '.' .$imagenOriginal->getClientOriginalExtension();
+        $imagen->save($ruta . $temp_name, 100);
         $product = new Product;
         $product->nombre = $request->nombre;
         $product->descripcion = $request->descripcion;
-        $product->foto = $request->foto;
+        $product->foto = $temp_name;
         $product->precio = $request->precio;
         if($product->save()){
             return redirect('/home');
@@ -85,11 +100,19 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
 
+        if ($request->file('foto')){
+            $ruta = public_path().'/img/';
+            $imagenOriginal = $request->file('foto');
+            $imagen = Image::make($imagenOriginal);
+            $temp_name = $this->random_string() . '.' .$imagenOriginal->getClientOriginalExtension();
+            $imagen->save($ruta . $temp_name, 100);
+        }
         $product->nombre = $request->get('nombre');
         $product->descripcion = $request->get('descripcion');
-        $product->foto = $request->get('foto');
+        if ($temp_name != ""){
+            $product->foto = $temp_name;
+        }
         $product->precio = $request->get('precio');
-
         $product->save();
 
         return redirect("/home")->with('success', 'Producto Actualizado!');
@@ -104,6 +127,6 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
-        return redirect('/home');
+        return redirect('/home')->with('success', 'Producto Borrado!');
     }
 }
