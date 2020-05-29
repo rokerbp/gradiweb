@@ -23,6 +23,10 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Uso
 
+Correr: composer install
+
+Correr migraciones: php artisan migrate
+
 Para los datos de ejemplo correr: php artisan db:seed
 
 El seed crea 10 productos de ejemplo y un usuario administrador
