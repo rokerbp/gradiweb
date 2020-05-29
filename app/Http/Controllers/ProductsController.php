@@ -14,7 +14,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        
+        $products = Product::all();
+        return view('products.index',['products'=>$products]);
     }
 
     /**
@@ -24,7 +25,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $product = new Product;
+        return view('products.create',["product" => $product]);
     }
 
     /**
@@ -35,7 +37,16 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product;
+        $product->nombre = $request->nombre;
+        $product->descripcion = $request->descripcion;
+        $product->foto = $request->foto;
+        $product->precio = $request->precio;
+        if($product->save()){
+            return redirect('/home');
+        }else{
+            return view('products.create',["product"=> $product]);
+        }
     }
 
     /**
@@ -46,7 +57,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view ('products.show',['product'=>$product]);
     }
 
     /**
@@ -57,7 +69,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        //return view('products.edit',["product" => $product]);
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -69,7 +83,16 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+
+        $product->nombre = $request->get('nombre');
+        $product->descripcion = $request->get('descripcion');
+        $product->foto = $request->get('foto');
+        $product->precio = $request->get('precio');
+
+        $product->save();
+
+        return redirect("/home")->with('success', 'Producto Actualizado!');
     }
 
     /**
@@ -80,6 +103,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return redirect('/home');
     }
 }

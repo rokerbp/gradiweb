@@ -1,5 +1,6 @@
 <?php
 
+use App\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $products = Product::all();
+    return view('welcome',['products'=>$products]);
 });
+
+Route::get('/show/{id}', 'PublicController@show')->name('show');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('products', 'ProductsController');
+Route::group(['middleware' => 'admin'], function () {
+    Route::resource('products', 'ProductsController');
+});
+
