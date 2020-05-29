@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('/show/{id}', 'PublicController@show')->name('show');
 
-Auth::routes();
+Auth::routes(["register" => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
