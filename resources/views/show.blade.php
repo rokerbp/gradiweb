@@ -17,6 +17,8 @@
     <div class="col-md-4">
       <h3 class="my-3"> Descripcion del producto</h3>
       <p>{{$product->descripcion}}</p>
+      <h3>Precio</h3>
+      <p>{{$product->precio}}</p>
     </div>
 
   </div>
