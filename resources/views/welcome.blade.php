@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
             html, body {
                 background-color: #fff;
@@ -45,7 +46,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 64px;
             }
 
             .links > a {
@@ -59,16 +60,16 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 0px;
             }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Admin</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -78,27 +79,28 @@
                     @endauth
                 </div>
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Tienda
-                </div>
-
-                <div><table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($products as $p)
-                    <tr>
-                        <th scope="row">{{$p->id}}</th>
-                        <td><a href="{{ route('show',$p->id)}}">{{ $p->nombre }}</a></td>
-                    </tr>
-                    @endforeach
-
+        </div>
+        <div class="container my-5 content">
+            <div class="title m-b-md">
+                Tienda
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <table class="table ">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($products as $p)
+                        <tr>
+                            <th scope="row">{{$p->id}}</th>
+                            <td><a href="{{ route('show',$p->id)}}">{{ $p->nombre }}</a></td>
+                        </tr>
+                        @endforeach
+                    </table>
                 </div>
             </div>
         </div>
