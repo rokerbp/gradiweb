@@ -7,20 +7,26 @@
             <div class="card">
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
                     <div class="row py-5">
                         <div class="col-sm-8"><h2>Productos <b>Tienda</b></h2></div>
                         <div class="col-sm-4">
-                            <a href="{{url('/products/create')}}" class="btn btn-primary">Nuevo producto</a>
+                            <a href="{{url('/products/create')}}" class="btn btn-outline-success">Nuevo producto</a>
                         </div>
                     </div>
                 </div>
                 @if(session()->get('success'))
-                    <div class="alert alert-success">
-                    {{ session()->get('success') }}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session()->get('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
 
@@ -43,7 +49,7 @@
                                     <a href="{{ route('products.show',$p->id)}}">{{$p->nombre}}</a>
                                 </td>
                                 <td class="column-verticallineMiddle form-inline">
-                                    <a href="{{ route('products.edit',$p->id)}}" class="btn btn-warning">Editar</a>
+                                    <a href="{{ route('products.edit',$p->id)}}" class="btn btn-outline-info">Editar</a>
                                     @include('products.delete', ['product' => $p])
                                 </td>
                             </tr>

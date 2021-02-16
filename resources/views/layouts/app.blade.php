@@ -28,9 +28,15 @@
                 <!--<a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>-->
-                <a class="navbar-brand" >
-                    Panel de Admin
-                </a>
+                @guest
+                    <a href="{{url('/')}}" class="navbar-brand" >
+                        Gradiweb Shop
+                    </a>
+                @else
+                    <a href="{{url('/home')}}" class="navbar-brand" >
+                        Gradiweb Shop (Admin)
+                    </a>
+                @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

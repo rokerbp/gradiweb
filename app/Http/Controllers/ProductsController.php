@@ -99,7 +99,7 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-
+        $temp_name = $product->foto;
         if ($request->file('foto')){
             $ruta = public_path().'/img/';
             $imagenOriginal = $request->file('foto');
@@ -111,6 +111,9 @@ class ProductsController extends Controller
         $product->descripcion = $request->get('descripcion');
         if ($temp_name != ""){
             $product->foto = $temp_name;
+        }
+        else{
+            $product->foto = $product->foto;
         }
         $product->precio = $request->get('precio');
         $product->save();

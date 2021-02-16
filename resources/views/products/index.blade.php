@@ -24,7 +24,7 @@
             <tr>
                 <td><a href="{{ route('products.show',$product->id)}}">{{ $product->nombre }}</a></td>
                 <td>
-                <a href="{{ route('products.edit',$product->id)}}" class="btn btn-warning">Editar</a>
+                <a href="{{ route('products.edit',$product->id)}}" class="btn btn-outline-info">Editar</a>
                 @include('products.delete', ['product' => $product])
                 </td>
             </tr>
